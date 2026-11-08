@@ -56,65 +56,7 @@
 
 밖에서 보이는 것은 web 하나예요. 그 뒤에서 서비스 다섯 개가 역할을 나눠 맡고, GPU가 필요한 일은 GPU PC의 워커가 가져가 처리해요.
 
-```mermaid
-flowchart TB
-    USER(["📱 브라우저 · 휴대폰 / PC"])
-
-    subgraph K8S["☸️ 쿠버네티스 클러스터"]
-        direction TB
-        ING["Ingress · Nginx<br/><sub>외부 공개는 web 하나</sub>"]
-        WEB["<b>web</b><br/>Next.js · BFF"]
-        GW["<b>api-gateway</b><br/>Spring Cloud Gateway"]
-
-        subgraph SVC["백엔드 서비스"]
-            direction LR
-            AUTH["<b>auth-service</b><br/>회원 · 로그인"]
-            CONV["<b>conversation-service</b><br/>녹음 → 4컷 전 과정 지휘"]
-            CONT["<b>content-service</b><br/>스토리 · 피드 · 소셜"]
-        end
-
-        subgraph DATA["데이터"]
-            direction LR
-            PG[("PostgreSQL + pgvector<br/><sub>서비스별 스키마 · GPU 작업 대기열</sub>")]
-            S3[("MinIO<br/><sub>녹음 · 그림 파일</sub>")]
-        end
-    end
-
-    subgraph GPU["🖥️ GPU PC · RTX 5060 Ti 16GB"]
-        direction TB
-        WORKER["<b>model-runtime</b> 워커<br/><sub>WhisperX · pyannote · FLUX.1-schnell</sub>"]
-        OLLAMA["Ollama · Qwen3 8B<br/><sub>마지막 대체 LLM</sub>"]
-        WORKER --- OLLAMA
-    end
-
-    subgraph EXT["☁️ 외부 모델 API"]
-        direction TB
-        CLAUDE["Claude Opus 5.5<br/><sub>장면 · 콘티 1순위</sub>"]
-        GEMINI["Gemini 3.5 Flash-Lite<br/><sub>글 다듬기 · 콘티 2순위</sub>"]
-        EMB["임베딩 서버 · BGE-M3<br/><sub>외모 문장 → 1,024차원</sub>"]
-    end
-
-    USER -- "HTTPS · 암호화 쿠키 세션" --> ING --> WEB
-    WEB -- "JWT" --> GW
-    GW -- "REST + OpenAPI" --> AUTH & CONV & CONT
-    CONV -- "내부 API" --> CONT
-    AUTH & CONV & CONT --- PG
-    CONV --- S3
-    CONV --> CLAUDE & GEMINI & EMB
-    WORKER == "HTTPS로 일을 가져감 (pull)" ==> GW
-    WORKER -. "15분짜리 저장소 주소" .-> S3
-
-    classDef edge fill:#fff4e6,stroke:#f08c00,color:#000
-    classDef svc fill:#e7f5ff,stroke:#1c7ed6,color:#000
-    classDef store fill:#f3f0ff,stroke:#7048e8,color:#000
-    classDef gpu fill:#ebfbee,stroke:#2f9e44,color:#000
-    classDef ext fill:#f8f9fa,stroke:#868e96,color:#000
-    class ING,WEB,GW edge
-    class AUTH,CONV,CONT svc
-    class PG,S3 store
-    class WORKER,OLLAMA gpu
-    class CLAUDE,GEMINI,EMB ext
-```
+<p align="center"><img src="images/architecture.png" alt="전체 아키텍처: 쿠버네티스 클러스터(web, api-gateway, auth·conversation·content 서비스, PostgreSQL + pgvector, MinIO), GPU PC(model-runtime 워커, Ollama), 외부 모델 API(Claude, Gemini, 임베딩 서버)" width="100%"></p>
 
 ### 서비스마다 하는 일
 
