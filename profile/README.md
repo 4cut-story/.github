@@ -48,7 +48,7 @@ Next.js · React · TypeScript · Tailwind · Java · Spring Boot · Python · P
 | **api-gateway** | Spring Cloud Gateway | 백엔드 입구. 로그인 확인과 길 안내 | 로그인 토큰(JWT)의 서명을 공개키로 확인해요<br>밖에서 몰래 넣은 사용자 정보 헤더는 지우고, 확인한 값만 다시 붙여요<br>GPU PC 워커 전용 경로는 워커 토큰으로만 열려요<br>첫 화면, 공개 게시물, 캐릭터 갤러리, 배경음 라이브러리는 로그인하지 않아도 볼 수 있어요 |
 | **auth-service** | Spring Boot 4 · Spring Security | 회원과 로그인 | GitHub·Google 로그인, 같은 이메일이 확인되면 두 계정을 자동 연결<br>접속 토큰 15분, 갱신 토큰 14일이며 갱신 토큰은 쓸 때마다 새로 바꿔요<br>개인 토큰(PAT)은 로그인한 회원이 직접 발급해요. 게시 권한만 있고 최대 90일, 언제든 폐기할 수 있어요. 원문은 해시로만 저장하고 발급·사용·폐기를 기록해요 |
 | **conversation-service** | Spring Boot 4 · Spring Modulith · Spring AI | 녹음부터 4컷 완성까지 전 과정을 지휘 | 안쪽을 모듈 5개(흐름 관리, 받아 적기, 시나리오, 만화, 캐릭터)로 나누고 서로 공개 창구로만 불러요<br>GPU 작업 대기열을 관리하고, 실패한 단계부터 자동으로 다시 해요<br>외부 LLM(Claude, Gemini) 호출과 대체 순서도 여기서 정해요<br>기사로 만들기: 기사 주소를 SSRF 검사 뒤 대신 열어 본문만 고르고, 칼럼·사설·인터뷰·사진·영상 기사는 거른 뒤 사실만 가져와 새 대화로 각색해 같은 흐름에 넣어요<br>RSS 구독: 등록한 피드를 30분마다 확인해 새 기사로 만들고, 최근 3일 안의 비슷한 주제는 임베딩으로 걸러요 |
-| **content-service** | Spring Boot 4 | 만든 4컷을 모으고 나누기 | 내 스토리, 게시(전체 공개·팔로워만), 피드, 좋아요, 댓글, 팔로우<br>완성된 4컷은 conversation-service가 내부 API로 등록해요 |
+| **content-service** | Spring Boot 4 | 만든 4컷을 모으고 나누기 | 내 스토리, 게시(전체 공개·팔로워만), 피드(전체·팔로잉 탭), 좋아요, 댓글, 팔로우(만화를 보다가 작성자 옆에서 바로, 프로필에서 팔로워·팔로잉 목록)<br>완성된 4컷은 conversation-service가 내부 API로 등록해요 |
 | **model-runtime** | Python · PyTorch · diffusers · WhisperX | GPU PC에서 도는 작업 프로그램(워커) | DB도 업무 규칙도 없이, 받은 일만 실행하고 결과를 올려요<br>받아 적기·그림은 직접, LLM은 같은 PC의 Ollama에 넘겨요 |
 
 ### 서비스끼리 주고받는 방식
