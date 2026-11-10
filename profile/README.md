@@ -4,6 +4,8 @@
 
 **[🎬 데모 사이트 4cut.java21.net](https://4cut.java21.net)**
 
+짧은 소개는 [4cut.java21.net/about](https://4cut.java21.net/about)에 있고, 이 글에는 단계별 규칙과 모델 설정값, 개선 기록까지 자세히 적었어요.
+
 Next.js · React · TypeScript · Tailwind · Java · Spring Boot · Python · PyTorch · PostgreSQL · Kubernetes · Docker · GitHub Actions
 
 ## ✨ 한눈에 보기
