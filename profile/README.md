@@ -6,7 +6,10 @@
 
 녹음 대신 뉴스 기사 주소를 넣거나 RSS 피드를 구독해 두어도 4컷이 만들어져요.
 
-[![Demo](https://img.shields.io/badge/demo-4cut.java21.net-ff6b6b?style=flat-square)](https://4cut.java21.net)
+<a href="https://4cut.java21.net"><img src="https://img.shields.io/badge/데모_사이트_바로가기-4cut.java21.net-ff6b6b?style=for-the-badge" alt="데모 사이트 바로가기" height="44"></a>
+
+### [4cut.java21.net](https://4cut.java21.net)에서 바로 만들어 볼 수 있어요
+
 [![About](https://img.shields.io/badge/about-소개-4c6ef5?style=flat-square)](https://4cut.java21.net/about)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4-6DB33F?style=flat-square&logo=springboot&logoColor=white)
@@ -20,33 +23,33 @@
 
 ---
 
-## ✨ 주요 기능
+## 주요 기능
 
-- 🎙️ **녹음 한 번으로 만화** 휴대폰 브라우저로 녹음하면 받아 적고, 웃음·반전·진심이 담긴 순간을 골라 4~10컷으로 그려요
-- 📰 **기사·RSS로 만화** 기사 속 사실만 가져와 새 대화로 각색하고, 구독한 피드는 새 기사가 올라올 때마다 저절로 만들어요
-- 🧑‍🎨 **같은 인물, 같은 얼굴** 캐릭터 1,013명(참조 그림 42,546장) 중 어울리는 인물을 골라 모든 컷에서 같은 모습으로 그려요
-- 🎨 **테마와 사투리** 그림 테마 7가지, 사투리에 맞춘 대사, 말풍선까지 넣은 한 장으로 완성해요
-- 🔒 **개인정보 보호** 실명은 가명으로 바꾸고, 원본 녹음은 받아 적자마자 지워요
+- **녹음 한 번으로 만화** 휴대폰 브라우저로 녹음하면 받아 적고, 웃음·반전·진심이 담긴 순간을 골라 4~10컷으로 그려요
+- **기사·RSS로 만화** 기사 속 사실만 가져와 새 대화로 각색하고, 구독한 피드는 새 기사가 올라올 때마다 저절로 만들어요
+- **같은 인물, 같은 얼굴** 캐릭터 1,013명(참조 그림 42,546장) 중 어울리는 인물을 골라 모든 컷에서 같은 모습으로 그려요
+- **테마와 사투리** 그림 테마 7가지, 사투리에 맞춘 대사, 말풍선까지 넣은 한 장으로 완성해요
+- **개인정보 보호** 실명은 가명으로 바꾸고, 원본 녹음은 받아 적자마자 지워요
 
-## 📊 한눈에 보기
+## 한눈에 보기
 
 | 서비스 + GPU 워커 | 단계별 AI 모델 | 컷 한 장 그리기 | 그림 품질 점수 |
 | :---: | :---: | :---: | :---: |
 | **5 + 1** | **11개** | **약 5.4초** | **81.4 → 97.5점** |
 
-- 🖥️ **GPU 한 장으로** 모델 세 묶음을 RTX 5060 Ti 16GB 한 장에 나눠 올리고, 모델 전환은 1.2~1.4초
-- 🔌 **포트 없는 GPU 연결** GPU PC 워커가 HTTPS로 일을 가져가는(pull) 구조라 PC가 꺼져 있어도 일은 대기열에 남아요
-- 🛟 **멈추지 않는 LLM** Claude → Gemini → 로컬 Qwen3 8B 순서로 대체해요
+- **GPU 한 장으로** 모델 세 묶음을 RTX 5060 Ti 16GB 한 장에 나눠 올리고, 모델 전환은 1.2~1.4초
+- **포트 없는 GPU 연결** GPU PC 워커가 HTTPS로 일을 가져가는(pull) 구조라 PC가 꺼져 있어도 일은 대기열에 남아요
+- **멈추지 않는 LLM** Claude → Gemini → 로컬 Qwen3 8B 순서로 대체해요
 
-## 🏗️ 아키텍처
+## 아키텍처
 
 <p align="center"><img src="images/architecture.png" alt="전체 아키텍처" width="100%"></p>
 
 밖에 열린 것은 **web 하나**이고, 그 뒤에서 서비스 다섯 개가 역할을 나눠 맡아요. GPU가 필요한 일은 PostgreSQL 대기열(`SKIP LOCKED`)에 쌓이고 GPU PC 워커가 가져가 처리해요. 배포는 GitHub Actions → GHCR → Argo CD로 자동으로 이어져요.
 
-👉 서비스별 역할, 통신 방식, 로그인·배포 흐름은 [아키텍처 문서](https://github.com/4cut-story/.github/blob/main/docs/architecture.md)에 있어요.
+서비스별 역할, 통신 방식, 로그인·배포 흐름은 [아키텍처 문서](https://github.com/4cut-story/.github/blob/main/docs/architecture.md)에 있어요.
 
-## 🧰 기술 스택
+## 기술 스택
 
 | 분야 | 사용한 것 |
 | --- | --- |
@@ -57,7 +60,7 @@
 | **데이터** | PostgreSQL · pgvector · Flyway · MinIO |
 | **운영** | Kubernetes · Argo CD · GitHub Actions · GHCR |
 
-## 📂 저장소
+## 저장소
 
 | 저장소 | 설명 |
 | --- | --- |
@@ -71,7 +74,7 @@
 | [**deploy**](https://github.com/4cut-story/deploy) | 쿠버네티스 배포 설정 (Argo CD) |
 | [**docs**](https://github.com/4cut-story/docs) | 설계 문서와 개선 기록 |
 
-## 📚 자세한 문서
+## 자세한 문서
 
 | 문서 | 내용 |
 | --- | --- |
