@@ -6,6 +6,10 @@
 
 녹음 대신 뉴스 기사 주소를 넣거나 RSS 피드를 구독해 두어도 4컷이 만들어져요.
 
+<a href="https://4cut.java21.net"><img src="https://img.shields.io/badge/🎬_데모_사이트_바로가기-4cut.java21.net-ff6b6b?style=for-the-badge" alt="데모 사이트 바로가기" height="44"></a>
+
+### 👉 [4cut.java21.net](https://4cut.java21.net) 에서 바로 만들어 볼 수 있어요
+
 [![Demo](https://img.shields.io/badge/demo-4cut.java21.net-ff6b6b?style=flat-square)](https://4cut.java21.net)
 [![About](https://img.shields.io/badge/about-소개-4c6ef5?style=flat-square)](https://4cut.java21.net/about)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
