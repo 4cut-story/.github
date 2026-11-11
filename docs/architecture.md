@@ -8,12 +8,12 @@
 
 | 핵심 설계 | 내용 |
 | --- | --- |
-| 🧩 **배포 단위 7개** | 생성 과정은 conversation-service 안 모듈 5개로 나누고, Spring Modulith 테스트로 경계를 지켜요 |
-| 📥 **큐 서버 없는 대기열** | PostgreSQL 표 + `SKIP LOCKED`. 워커가 30초마다 진행을 알려 90초 임대를 연장해요 |
-| 📁 **파일은 저장소 주소로** | 녹음·그림은 15분짜리 MinIO 주소로 직접 올리고 받아요. 워커는 저장소 키가 없어요 |
-| 🔐 **토큰은 BFF가 보관** | 암호화 쿠키에만 두고, 브라우저 코드에는 토큰도 백엔드 주소도 없어요 |
-| 🚦 **정해진 방향으로만** | web → gateway → 서비스, conversation → content만 NetworkPolicy로 허용 |
-| 🚀 **자동 배포** | PR(정적 분석 · 커버리지 80%) → GHCR 이미지 → deploy 레포 자동 커밋 → Argo CD 동기화 |
+| **배포 단위 7개** | 생성 과정은 conversation-service 안 모듈 5개로 나누고, Spring Modulith 테스트로 경계를 지켜요 |
+| **큐 서버 없는 대기열** | PostgreSQL 표 + `SKIP LOCKED`. 워커가 30초마다 진행을 알려 90초 임대를 연장해요 |
+| **파일은 저장소 주소로** | 녹음·그림은 15분짜리 MinIO 주소로 직접 올리고 받아요. 워커는 저장소 키가 없어요 |
+| **토큰은 BFF가 보관** | 암호화 쿠키에만 두고, 브라우저 코드에는 토큰도 백엔드 주소도 없어요 |
+| **정해진 방향으로만** | web → gateway → 서비스, conversation → content만 NetworkPolicy로 허용 |
+| **자동 배포** | PR(정적 분석 · 커버리지 80%) → GHCR 이미지 → deploy 레포 자동 커밋 → Argo CD 동기화 |
 
 ## 서비스별 역할
 
